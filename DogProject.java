@@ -1,6 +1,20 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/*
+
+TO DO'S:
+
+- Change all "user/s" to "owner/s"
+
+Methods to do:
+- Check if owner is in owners ArrayList
+- Check if dog is in dogs ArrayList
+- Remove dog from dogs ArrayList
+
+*/
+
 public class DogProject {
   static Scanner input = new Scanner(System.in);
   public static ArrayList<Owner> owners = new ArrayList<Owner>();
@@ -17,6 +31,7 @@ public class DogProject {
       "\n* give dog" +
       "\n* list owners" +
       "\n* remove owned dog" +
+      "\n* remove owner" +
       "\n* exit"
     );
   }
@@ -172,6 +187,27 @@ public class DogProject {
     }
   }
   
+  public static void removeOwner() {
+    System.out.print("Name of the owner?> ");
+    String ownerName = input.nextLine();
+    boolean ownerFound = false;
+    for (Owner owner : owners) {
+      if (ownerName.equalsIgnoreCase(owner.getName())) {
+        // Remove user's dog(s) from the register
+        for (Dog dog : owner.getDogs()) {
+          dogs.remove(dog);
+        }
+        owners.remove(owner);
+        System.out.println(owner.getName() + " was removed from the register");
+        ownerFound = true;
+        break;
+      }
+    }
+    if (!ownerFound) {
+      System.out.println("Error: owner doesn't exist");
+    }
+  }
+  
   static void runProgram() {
     boolean programIsRunning = true;
     System.out.println("\nWelcome!\n");
@@ -203,6 +239,9 @@ public class DogProject {
           break;
         case "remove owned dog":
           removeOwnedDog();
+          break;
+        case "remove owner":
+          removeOwner();
           break;
         case "exit":
           programIsRunning = false;

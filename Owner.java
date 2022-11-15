@@ -13,5 +13,16 @@ public class Owner {
 		dogs.add(dog);
 	}
 	
+	public void removeDog(Dog dog) {
+		dogs.remove(dog);
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public ArrayList<Dog> getDogs() {
+		return dogs;
+	}
 	
 }

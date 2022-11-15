@@ -48,7 +48,23 @@ public class Dog {
 		}
 	}
 	
+	public void increaseAge() {
+		age++;
+	}
+	
 	public double getTailLength() {
 		return tailLength;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getOwner() {
+		return owner;
+	}
+	
+	public void removeOwner() {
+		owner = "";
 	}
 }

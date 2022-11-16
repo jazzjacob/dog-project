@@ -1,16 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /*
 
-TO DO'S:
-
-- Change all "owner/s" to "owner/s"
-
 Methods to do:
-- Check if owner is in owners ArrayList
+* Check if owner is in owners ArrayList - findUserInRegisterByName
 - Check if dog is in dogs ArrayList
+- Check if name is in dogs ArrayList
+- Check if dog has owner
 - Remove dog from dogs ArrayList
 
 */
@@ -19,6 +16,29 @@ public class DogProject {
   static Scanner input = new Scanner(System.in);
   public static ArrayList<Owner> owners = new ArrayList<Owner>();
   public static ArrayList<Dog> dogs = new ArrayList<Dog>();
+  
+  // Returns the object of an owner if input name is in an ArryList<Owner>
+  public static Owner findUserInRegisterByName(String nameToFind, ArrayList<Owner> owners) {
+    boolean ownerFound = false;
+    for (Owner owner : owners) {
+      if (nameToFind.equalsIgnoreCase(owner.getName())) {
+        ownerFound = true;
+        return owner;
+      }
+    }
+    return null;
+  }
+  
+  public static Dog findDogInRegisterByName(String nameToFind, ArrayList<Dog> dogs) {
+    boolean dogFound = false;
+    for (Dog dog : dogs) {
+      if (nameToFind.equalsIgnoreCase(dog.getName())) {
+        dogFound = true;
+        return dog;
+      }
+    }
+    return null;
+  }
   
   public static void printStartMenu() {
     System.out.println(
@@ -66,17 +86,13 @@ public class DogProject {
   public static void increaseAge() {
     System.out.print("Name of the dog?> ");
     String name = input.nextLine();
-    boolean nameFound = false;
-    for (Dog dog : dogs) {
-      if (dog.getName().equalsIgnoreCase(name)) {
-        dog.increaseAge();
-        System.out.println(dog.getName() + " is now one year older");
-        nameFound = true;
-      }
-    }
-    if (!nameFound) {
+    Dog dog = findDogInRegisterByName(name, dogs);
+    if (!(dog == null)) {
+      dog.increaseAge();
+      System.out.println(dog.getName() + " is now one year older");
+    } else {
       System.out.println("Error: no such dog");
-    } 
+    }
   }
   
   public static void removeDogFromOwner(Dog dog) {
@@ -119,7 +135,7 @@ public class DogProject {
     String name = input.nextLine();
     boolean dogFound = false;
     for (Dog dog : dogs) {
-      if (dog.getName().equalsIgnoreCase(name)) { // Checks if dog name is exists 
+      if (dog.getName().equalsIgnoreCase(name)) { // Checks if input name is in dogs register 
         if (dog.getOwner().length() > 0) { // Checks if dog has dog owner
           for (Owner owner : owners) {
             if (owner.getName().equalsIgnoreCase(dog.getOwner())) { // Checks if owner's name equals dog's owner's name
@@ -161,16 +177,13 @@ public class DogProject {
     if (dogFound) {
       System.out.print("Name of the owner?> ");
       String ownerName = input.nextLine();
-      boolean ownerFound = false;
-      for (Owner owner : owners) {
-        if (owner.getName().equalsIgnoreCase(ownerName)) {
-          ownerFound = true;
-          owner.addDog(dogToGiveAway);
-          dogToGiveAway.addOwner(owner.getName());
-          System.out.println(dogToGiveAway.getName() + " was given to " + owner.getName());
-        }
-      }
-      if (!ownerFound) {
+      Owner owner = findUserInRegisterByName(ownerName, owners);
+      
+      if (!(owner == null)) {
+        owner.addDog(dogToGiveAway);
+        dogToGiveAway.addOwner(owner.getName());
+        System.out.println(dogToGiveAway.getName() + " was given to " + owner.getName());
+      } else {
         System.out.println("Error: No such owner found");
       }
     } else {

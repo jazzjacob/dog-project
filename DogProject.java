@@ -5,9 +5,8 @@ import java.util.Scanner;
 
 Methods to do:
 * Check if owner is in owners ArrayList - findUserInRegisterByName
-- Check if dog is in dogs ArrayList
-- Check if name is in dogs ArrayList
-- Check if dog has owner
+* Check if dog is in dogs ArrayList - findDogInRegisterByName
+- Remove dog from owner - removeDogFromOwner
 - Remove dog from dogs ArrayList
 
 */
@@ -38,6 +37,16 @@ public class DogProject {
       }
     }
     return null;
+  }
+  
+  public static void removeDogFromOwner(Dog dog, ArrayList<Owner> owners) {
+    if (dog.getOwner().length() > 0) { // Checks if dog has dog owner
+      for (Owner owner : owners) {
+        if (owner.getName().equalsIgnoreCase(dog.getOwner())) { // Checks if owner's name equals dog's owner's name
+          owner.removeDog(dog);
+        }
+      }
+    }
   }
   
   public static void printStartMenu() {
@@ -134,22 +143,13 @@ public class DogProject {
     System.out.print("Name of the dog?> ");
     String name = input.nextLine();
     boolean dogFound = false;
-    for (Dog dog : dogs) {
-      if (dog.getName().equalsIgnoreCase(name)) { // Checks if input name is in dogs register 
-        if (dog.getOwner().length() > 0) { // Checks if dog has dog owner
-          for (Owner owner : owners) {
-            if (owner.getName().equalsIgnoreCase(dog.getOwner())) { // Checks if owner's name equals dog's owner's name
-              owner.removeDog(dog);
-            }
-          }
-        }
-        dogs.remove(dog);
-        dogFound = true;
-        System.out.println(dog.getName() + " was removed from the register");
-        break;
-      }
-    }
-    if (!dogFound) {
+    Dog dog = findDogInRegisterByName(name, dogs);
+    
+    if (dog != null) {
+      removeDogFromOwner(dog, owners);
+      dogs.remove(dog);
+      System.out.println(dog.getName() + " was removed from the register");
+    } else {
       System.out.println("Error: no such name");
     }
   }

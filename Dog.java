@@ -67,4 +67,13 @@ public class Dog {
 	public void removeOwner() {
 		owner = "";
 	}
+	
+	public boolean addOwner(String name) {
+		if (owner.length() > 0) {
+			return false;
+		} else {
+			owner = name;
+			return true;			
+		}
+	}
 }

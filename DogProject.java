@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 TO DO'S:
 
-- Change all "user/s" to "owner/s"
+- Change all "owner/s" to "owner/s"
 
 Methods to do:
 - Check if owner is in owners ArrayList
@@ -159,17 +159,19 @@ public class DogProject {
     }
     
     if (dogFound) {
-      System.out.print("Name of the user?> ");
-      String userName = input.nextLine();
-      boolean userFound = false;
+      System.out.print("Name of the owner?> ");
+      String ownerName = input.nextLine();
+      boolean ownerFound = false;
       for (Owner owner : owners) {
-        if (owner.getName().equalsIgnoreCase(userName)) {
-          userFound = true;
+        if (owner.getName().equalsIgnoreCase(ownerName)) {
+          ownerFound = true;
           owner.addDog(dogToGiveAway);
+          dogToGiveAway.addOwner(owner.getName());
+          System.out.println(dogToGiveAway.getName() + " was given to " + owner.getName());
         }
       }
-      if (!userFound) {
-        System.out.println("Error: No such user found");
+      if (!ownerFound) {
+        System.out.println("Error: No such owner found");
       }
     } else {
       System.out.println("Error: no such dog or dog already owned");
@@ -193,7 +195,7 @@ public class DogProject {
     boolean ownerFound = false;
     for (Owner owner : owners) {
       if (ownerName.equalsIgnoreCase(owner.getName())) {
-        // Remove user's dog(s) from the register
+        // Remove owner's dog(s) from the register
         for (Dog dog : owner.getDogs()) {
           dogs.remove(dog);
         }

@@ -1,23 +1,13 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-
-Methods to do:
-* Check if owner is in owners ArrayList - findUserInRegisterByName
-* Check if dog is in dogs ArrayList - findDogInRegisterByName
-- Remove dog from owner - removeDogFromOwner
-- Remove dog from dogs ArrayList
-
-*/
-
 public class DogProject {
   static Scanner input = new Scanner(System.in);
   public static ArrayList<Owner> owners = new ArrayList<Owner>();
   public static ArrayList<Dog> dogs = new ArrayList<Dog>();
   
   // Returns the object of an owner if input name is in an ArryList<Owner>
-  public static Owner findUserInRegisterByName(String nameToFind, ArrayList<Owner> owners) {
+  public static Owner findOwnerInRegisterByName(String nameToFind, ArrayList<Owner> owners) {
     boolean ownerFound = false;
     for (Owner owner : owners) {
       if (nameToFind.equalsIgnoreCase(owner.getName())) {
@@ -29,10 +19,8 @@ public class DogProject {
   }
   
   public static Dog findDogInRegisterByName(String nameToFind, ArrayList<Dog> dogs) {
-    boolean dogFound = false;
     for (Dog dog : dogs) {
       if (nameToFind.equalsIgnoreCase(dog.getName())) {
-        dogFound = true;
         return dog;
       }
     }
@@ -46,6 +34,12 @@ public class DogProject {
           owner.removeDog(dog);
         }
       }
+    }
+  }
+  
+  public static void removeDogsFromOwner(Owner owner) {
+    for (Dog dog : owner.getDogs()) {
+      dogs.remove(dog);
     }
   }
   
@@ -107,17 +101,14 @@ public class DogProject {
   public static void removeDogFromOwner(Dog dog) {
     boolean dogRemoved = false;
     if (dog.getOwner().length() > 0) { // Checks if dog has dog owner
-      for (Owner owner : owners) {
-        if (owner.getName().equalsIgnoreCase(dog.getOwner())) { // Checks if owner's name equals dog's owner's name
-          owner.removeDog(dog);
-          dogRemoved = true;
-          System.out.println(dog.getName() + " was removed from " + owner.getName());
-        }
+      // Find owner by name
+      Owner owner = findOwnerInRegisterByName(dog.getOwner(), owners);
+      if (owner != null) {
+        owner.removeDog(dog);
+        System.out.println(dog.getName() + " was removed from " + owner.getName());     
+      } else {
+        System.out.println("Error: dog's owner does not exist");
       }
-    }
-    
-    if (!dogRemoved) {
-      System.out.println("Error: no such dog");
     }
   }
   
@@ -142,7 +133,6 @@ public class DogProject {
   public static void removeDog() {
     System.out.print("Name of the dog?> ");
     String name = input.nextLine();
-    boolean dogFound = false;
     Dog dog = findDogInRegisterByName(name, dogs);
     
     if (dog != null) {
@@ -163,29 +153,23 @@ public class DogProject {
   
   public static void giveDog() {
     System.out.print("Name of the dog?> ");
-    boolean dogFound = false;
     String dogName = input.nextLine();
-    Dog dogToGiveAway = null;
-    for (Dog dog : dogs) {
-      // Check if dog exists and has no owner
-      if (dog.getName().equalsIgnoreCase(dogName) && dog.getOwner().length() == 0) {
-        dogFound = true;
-        dogToGiveAway = dog;
-      }
-    }
+    Dog dog = findDogInRegisterByName(dogName, dogs);
     
-    if (dogFound) {
+    // Check if dog exists and doesn't have owner
+    if ((dog != null) && (dog.getOwner().length() == 0)) {
       System.out.print("Name of the owner?> ");
       String ownerName = input.nextLine();
-      Owner owner = findUserInRegisterByName(ownerName, owners);
+      Owner owner = findOwnerInRegisterByName(ownerName, owners);
       
-      if (!(owner == null)) {
-        owner.addDog(dogToGiveAway);
-        dogToGiveAway.addOwner(owner.getName());
-        System.out.println(dogToGiveAway.getName() + " was given to " + owner.getName());
+      if (owner != null) {
+        owner.addDog(dog);
+        dog.addOwner(owner.getName());
+        System.out.println(dog.getName() + " was given to " + owner.getName());
       } else {
         System.out.println("Error: No such owner found");
       }
+      
     } else {
       System.out.println("Error: no such dog or dog already owned");
     }
@@ -194,31 +178,25 @@ public class DogProject {
   public static void removeOwnedDog() {
     System.out.print("Name of the dog?> ");
     String dogName = input.nextLine();
-    for (Dog dog : dogs) {
-      if (dog.getName().equalsIgnoreCase(dogName)) {
-        removeDogFromOwner(dog);
-        dog.removeOwner();
-      }
+    Dog dog = findDogInRegisterByName(dogName, dogs);
+    if (dog != null) {
+      removeDogFromOwner(dog);
+      dog.removeOwner();      
+    } else {
+      System.out.println("Error: no such dog");
     }
   }
   
   public static void removeOwner() {
     System.out.print("Name of the owner?> ");
     String ownerName = input.nextLine();
-    boolean ownerFound = false;
-    for (Owner owner : owners) {
-      if (ownerName.equalsIgnoreCase(owner.getName())) {
-        // Remove owner's dog(s) from the register
-        for (Dog dog : owner.getDogs()) {
-          dogs.remove(dog);
-        }
-        owners.remove(owner);
-        System.out.println(owner.getName() + " was removed from the register");
-        ownerFound = true;
-        break;
-      }
-    }
-    if (!ownerFound) {
+    Owner owner = findOwnerInRegisterByName(ownerName, owners);
+    if (owner != null) {
+      removeDogsFromOwner(owner);
+      owners.remove(owner);
+      System.out.println(owner.getName() + " was removed from the register");
+      // return;
+    } else {
       System.out.println("Error: owner doesn't exist");
     }
   }

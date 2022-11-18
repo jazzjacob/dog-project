@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class DogProject {
   static Scanner input = new Scanner(System.in);
-  public static ArrayList<Owner> owners = new ArrayList<Owner>();
-  public static ArrayList<Dog> dogs = new ArrayList<Dog>();
+  public static ArrayList<Owner> OWNERS = new ArrayList<Owner>();
+  public static ArrayList<Dog> DOGS = new ArrayList<Dog>();
   
   // Returns the object of an owner if input name is in an ArryList<Owner>
   public static Owner findOwnerInRegisterByName(String nameToFind, ArrayList<Owner> owners) {
@@ -39,7 +39,7 @@ public class DogProject {
   
   public static void removeDogsFromOwner(Owner owner) {
     for (Dog dog : owner.getDogs()) {
-      dogs.remove(dog);
+      DOGS.remove(dog);
     }
   }
   
@@ -82,14 +82,14 @@ public class DogProject {
     int age = input.nextInt();
     System.out.print("Weight?> ");
     int weight = input.nextInt();
-    dogs.add(new Dog(name, breed, age, weight, 4.80, ""));
+    DOGS.add(new Dog(name, breed, age, weight, 4.80, ""));
     System.out.println(name + " added to the register.");
   }
   
   public static void increaseAge() {
     System.out.print("Name of the dog?> ");
     String name = input.nextLine();
-    Dog dog = findDogInRegisterByName(name, dogs);
+    Dog dog = findDogInRegisterByName(name, DOGS);
     if (!(dog == null)) {
       dog.increaseAge();
       System.out.println(dog.getName() + " is now one year older");
@@ -102,7 +102,7 @@ public class DogProject {
     boolean dogRemoved = false;
     if (dog.getOwner().length() > 0) { // Checks if dog has dog owner
       // Find owner by name
-      Owner owner = findOwnerInRegisterByName(dog.getOwner(), owners);
+      Owner owner = findOwnerInRegisterByName(dog.getOwner(), OWNERS);
       if (owner != null) {
         owner.removeDog(dog);
         System.out.println(dog.getName() + " was removed from " + owner.getName());     
@@ -113,8 +113,8 @@ public class DogProject {
   }
   
   public static void listOwners() {
-    for (Owner owner : owners) {
-      System.out.println(owner.name  + " " + owner.dogs);
+    for (Owner owner : OWNERS) {
+      System.out.println(owner.getName()  + " " + owner.getDogs());
     }
   }
   
@@ -123,7 +123,7 @@ public class DogProject {
     double smallestTailLength = input.nextDouble();
     input.nextLine();
     
-    for (Dog dog : dogs) {
+    for (Dog dog : DOGS) {
       if (smallestTailLength <= dog.getTailLength()) {
         System.out.println(dog);        
       }
@@ -133,11 +133,11 @@ public class DogProject {
   public static void removeDog() {
     System.out.print("Name of the dog?> ");
     String name = input.nextLine();
-    Dog dog = findDogInRegisterByName(name, dogs);
+    Dog dog = findDogInRegisterByName(name, DOGS);
     
     if (dog != null) {
-      removeDogFromOwner(dog, owners);
-      dogs.remove(dog);
+      removeDogFromOwner(dog, OWNERS);
+      DOGS.remove(dog);
       System.out.println(dog.getName() + " was removed from the register");
     } else {
       System.out.println("Error: no such name");
@@ -147,20 +147,20 @@ public class DogProject {
   public static void registerNewOwner() {
     System.out.print("Name?> ");
     String name = input.nextLine();
-    owners.add(new Owner(name));
+    OWNERS.add(new Owner(name));
     System.out.println(name + " was added to the register.");
   }
   
   public static void giveDog() {
     System.out.print("Name of the dog?> ");
     String dogName = input.nextLine();
-    Dog dog = findDogInRegisterByName(dogName, dogs);
+    Dog dog = findDogInRegisterByName(dogName, DOGS);
     
     // Check if dog exists and doesn't have owner
     if ((dog != null) && (dog.getOwner().length() == 0)) {
       System.out.print("Name of the owner?> ");
       String ownerName = input.nextLine();
-      Owner owner = findOwnerInRegisterByName(ownerName, owners);
+      Owner owner = findOwnerInRegisterByName(ownerName, OWNERS);
       
       if (owner != null) {
         owner.addDog(dog);
@@ -178,7 +178,7 @@ public class DogProject {
   public static void removeOwnedDog() {
     System.out.print("Name of the dog?> ");
     String dogName = input.nextLine();
-    Dog dog = findDogInRegisterByName(dogName, dogs);
+    Dog dog = findDogInRegisterByName(dogName, DOGS);
     if (dog != null) {
       removeDogFromOwner(dog);
       dog.removeOwner();      
@@ -190,10 +190,10 @@ public class DogProject {
   public static void removeOwner() {
     System.out.print("Name of the owner?> ");
     String ownerName = input.nextLine();
-    Owner owner = findOwnerInRegisterByName(ownerName, owners);
+    Owner owner = findOwnerInRegisterByName(ownerName, OWNERS);
     if (owner != null) {
       removeDogsFromOwner(owner);
-      owners.remove(owner);
+      OWNERS.remove(owner);
       System.out.println(owner.getName() + " was removed from the register");
       // return;
     } else {
@@ -250,17 +250,17 @@ public class DogProject {
 
   public static void main(String[] args) {
   
-    owners.add(new Owner("Hassano"));
-    owners.add(new Owner("Klara"));
+    OWNERS.add(new Owner("Hassano"));
+    OWNERS.add(new Owner("Klara"));
     
-    dogs.add(new Dog("Dobby", "Cute", 12, 3, 3.30, "Hassano"));
-    dogs.add(new Dog("Billy boy", "Dalmatian", 8, 2, 23.30, "Klara"));
-    dogs.add(new Dog("Fallsmannen", "Cute", 12, 3, 3.30, ""));
+    DOGS.add(new Dog("Dobby", "Cute", 12, 3, 3.30, "Hassano"));
+    DOGS.add(new Dog("Billy boy", "Dalmatian", 8, 2, 23.30, "Klara"));
+    DOGS.add(new Dog("Fallsmannen", "Cute", 12, 3, 3.30, ""));
     
-    // Connect dog to owners' data
-    for (Owner owner : owners) {
-      for (Dog dog : dogs) {
-        if (dog.owner.equals(owner.name)) {
+    // Connect dog to OWNERS' data
+    for (Owner owner : OWNERS) {
+      for (Dog dog : DOGS) {
+        if (dog.getOwner().equals(owner.getName())) {
           owner.addDog(dog);
         }
       }
@@ -269,12 +269,12 @@ public class DogProject {
     System.out.println("\nThe following data is preloaded:");
     
     System.out.println("\nOWNERS:");
-    for (Owner owner : owners) {
-      System.out.println(owner.name  + " " + owner.dogs);
+    for (Owner owner : OWNERS) {
+      System.out.println(owner.getName()  + " " + owner.getDogs());
     }
     
     System.out.println("\nDOGS:");
-    for (Dog dog : dogs) {
+    for (Dog dog : DOGS) {
       System.out.println(dog);
     }
     

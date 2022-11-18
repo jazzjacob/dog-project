@@ -1,10 +1,10 @@
 public class Dog {
-	public String name;
-	String breed;
-	int age;
-	int weight;
-	double tailLength;
-	public String owner;
+	private String name;
+	private String breed;
+	private int age;
+	private int weight;
+	private double tailLength;
+	private String owner;
 	
 	public Dog(
 		String name,

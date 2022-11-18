@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Owner {
-	public String name;
-	public ArrayList<Dog> dogs;
+	private String name;
+	private ArrayList<Dog> dogs;
 	
 	public Owner(String name) {
 		this.name = name;

@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public class Dog {
 	private String name;
 	private String breed;
@@ -18,8 +20,22 @@ public class Dog {
 		this.breed = breed;
 		this.age = age;
 		this.weight = weight;
-		this.tailLength = tailLength;
+		this.tailLength = calculateTailLength(age, weight);
 		this.owner = owner;
+	}
+	
+	private double calculateTailLength(int age, int weight) {
+		String[] dachshundInDifferentLanguages = {"tax", "dachshund", "mäyräkoira", "teckel"};
+		for (String d : dachshundInDifferentLanguages) {
+			if (getBreed().equalsIgnoreCase(d)) {
+				return 3.7;
+			}
+		}
+		System.out.print("LOOK HERE: ");
+		System.out.println(age);
+		System.out.println(age * (weight / 10.0));
+		double tailLength = age * (weight / 10.0);
+		return tailLength;
 	}
 	
 	public String toString() {
@@ -30,7 +46,7 @@ public class Dog {
 				", " + age +
 				" years" +
 				", " + weight +
-				" kilo, " + tailLength +
+				" kilo, " + getTailLengthString() +
 				" cm tail, " + owner +
 				")"
 			);
@@ -41,7 +57,7 @@ public class Dog {
 				", " + age +
 				" years" +
 				", " + weight +
-				" kilo, " + tailLength +
+				" kilo, " + getTailLengthString() +
 				" cm tail, " + "no owner" +
 				")"
 			);	
@@ -53,7 +69,12 @@ public class Dog {
 	}
 	
 	public double getTailLength() {
-		return tailLength;
+		return this.tailLength;
+	}
+	
+	public String getTailLengthString() {
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
+		return numberFormat.format(this.tailLength);
 	}
 	
 	public String getName() {
@@ -62,6 +83,10 @@ public class Dog {
 	
 	public String getOwner() {
 		return owner;
+	}
+	
+	public String getBreed() {
+		return breed;
 	}
 	
 	public void removeOwner() {

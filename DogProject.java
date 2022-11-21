@@ -82,7 +82,7 @@ public class DogProject {
     int age = input.nextInt();
     System.out.print("Weight?> ");
     int weight = input.nextInt();
-    DOGS.add(new Dog(name, breed, age, weight, 4.80, ""));
+    DOGS.add(new Dog(name, breed, age, weight, ""));
     System.out.println(name + " added to the register.");
   }
   
@@ -253,9 +253,9 @@ public class DogProject {
     OWNERS.add(new Owner("Hassano"));
     OWNERS.add(new Owner("Klara"));
     
-    DOGS.add(new Dog("Dobby", "Cute", 12, 3, 3.30, "Hassano"));
-    DOGS.add(new Dog("Billy boy", "Dalmatian", 8, 2, 23.30, "Klara"));
-    DOGS.add(new Dog("Fallsmannen", "Cute", 12, 3, 3.30, ""));
+    DOGS.add(new Dog("Dobby", "Cute", 12, 3, "Hassano"));
+    DOGS.add(new Dog("Billy boy", "Dalmatian", 8, 2, "Klara"));
+    DOGS.add(new Dog("Fallsmannen", "Cute", 3, 3, ""));
     
     // Connect dog to OWNERS' data
     for (Owner owner : OWNERS) {

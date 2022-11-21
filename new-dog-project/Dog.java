@@ -1,3 +1,5 @@
+// Jacob Reinikainen Lindström, jare2473
+
 import java.text.DecimalFormat;
 
 public class Dog {
@@ -6,21 +8,18 @@ public class Dog {
 	private int age;
 	private int weight;
 	private double tailLength;
-	private String owner;
 	
 	public Dog(
 		String name,
 		String breed,
 		int age,
-		int weight,
-		String owner
+		int weight
 	) {
 		this.name = name;
 		this.breed = breed;
 		this.age = age;
 		this.weight = weight;
 		this.tailLength = calculateTailLength(age, weight);
-		this.owner = owner;
 	}
 	
 	private double calculateTailLength(int age, int weight) {
@@ -38,29 +37,14 @@ public class Dog {
 	}
 	
 	public String toString() {
-		if (owner.length() > 0) {
-			return (
-				name + " " +
-				"(" + breed +
-				", " + age +
-				" years" +
-				", " + weight +
-				" kilo, " + tailLength +
-				" cm tail, " + owner +
-				")"
-			);
-		} else {
-			return (
-				name + " " +
-				"(" + breed +
-				", " + age +
-				" years" +
-				", " + weight +
-				" kilo, " + tailLength +
-				" cm tail, " + "no owner" +
-				")"
-			);	
-		}
+		return 
+			name + " " +
+			"(" + breed +
+			", " + age +
+			" years" +
+			", " + weight +
+			" kilo, " + tailLength +
+			" cm tail, " + ")";
 	}
 	
 	public void increaseAge() {
@@ -81,24 +65,15 @@ public class Dog {
 		return name;
 	}
 	
-	public String getOwner() {
-		return owner;
-	}
-	
 	public String getBreed() {
 		return breed;
 	}
 	
-	public void removeOwner() {
-		owner = "";
+	public int getAge() {
+		return age;
 	}
 	
-	public boolean addOwner(String name) {
-		if (owner.length() > 0) {
-			return false;
-		} else {
-			owner = name;
-			return true;			
-		}
+	public int getWeight() {
+		return weight;
 	}
 }

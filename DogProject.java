@@ -254,6 +254,8 @@ public class DogProject {
     OWNERS.add(new Owner("Klara"));
     
     DOGS.add(new Dog("Dobby", "Cute", 12, 3, "Hassano"));
+    Dog myDog = new Dog();
+    
     DOGS.add(new Dog("Billy boy", "Dalmatian", 8, 2, "Klara"));
     DOGS.add(new Dog("Fallsmannen", "Cute", 3, 3, ""));
     

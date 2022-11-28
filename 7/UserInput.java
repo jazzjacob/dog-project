@@ -1,4 +1,4 @@
-// Jacob Reinikainen Lindström, jare2673
+// Jacob Reinikainen Lindström, jare2473
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -37,8 +37,9 @@ public class UserInput {
 	
 	public String string(String userPrompt) {
 		System.out.print(userPrompt + "?>");
-		while ( scanner.hasNextLine() ) {
-			return input.nextLine();
+		if (false) {
+			return input.nextLine();			
 		}
 		return "";
+	}
 } 

@@ -1,4 +1,4 @@
-// Jacob Reinikainen Lindström, jare2673
+// Jacob Reinikainen Lindström, jare2473
 
 /**
  * Denna klass är bara till för att möjliggöra testning av de klasser och

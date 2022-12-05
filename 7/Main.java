@@ -10,25 +10,25 @@ public class Main {
 		dogList.print();
 		System.out.println("Removing hans!!!");
 		dogList.print();
-		
-		
-		
+
+
+
 		AssignmentSevenPointSeven howdy = new AssignmentSevenPointSeven();
 		howdy.addDog(new Dog("zlatan", "Hello", 1, 1));
 		howdy.addDog(new Dog("börje", "There", 1, 1));
 		howdy.addDog(new Dog("alex", "Tjabba", 1, 1));
-		
+
 		Dog dog1 = new Dog("Adam", "Svejsan", 10, 30);
 		Dog dog2 = new Dog("Bertil", "Hejsan", 10, 3);
 		howdy.listDogs();
-		
+
 		int numberOfSwaps = howdy.sortDogs();
 		System.out.println("\nDogs have been sorted!!");
 		System.out.println("Number of swaps: " + numberOfSwaps);
-		
-		
+
+
 		howdy.listDogs();
-		
+
 		// hello.registerNewDog();
 	}
 }

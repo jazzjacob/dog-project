@@ -37,6 +37,8 @@ public class UserInput {
 	
 	public String string(String userPrompt) {
 		System.out.print(userPrompt + "?>");
-		return input.nextLine();
-	}
+		while ( scanner.hasNextLine() ) {
+			return input.nextLine();
+		}
+		return "";
 } 

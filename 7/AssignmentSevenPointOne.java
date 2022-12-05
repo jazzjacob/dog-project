@@ -4,11 +4,11 @@ import java.util.ArrayList;
 public class AssignmentSevenPointOne {
 	private ArrayList<Dog> dogList = new ArrayList<Dog>();
 	private UserInput input = new UserInput();
-	
+
 	private String formatString(String string) {
 		// Remove whitespace from before first letter and after last letter
 		string = string.trim();
-		
+
 		// Capitalize first letter
 		if (string.length() > 1) {
 			string = string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
@@ -17,18 +17,18 @@ public class AssignmentSevenPointOne {
 		}
 		return string;
 	}
-	
+
 	private boolean stringIsEmpty(String string) {
 		if (string.length() > 0) {
 			return false;
 		}
 		return true;
 	}
-	
+
 	private void printError(String errorMessage) {
 		System.out.println("Error: " + errorMessage);
 	}
-	
+
 	private String getNameFromUser(String type) {
 		String name = input.string(type);
 		name = formatString(name);
@@ -39,18 +39,18 @@ public class AssignmentSevenPointOne {
 		}
 		return name;
 	}
-	
-	
+
+
 	public void registerNewDog() {
 		String name = getNameFromUser("Name");
 		String breed = getNameFromUser("Breed");
 		int age = input.integer("Age");
 		int weight = input.integer("Weight");
-		
+
 		dogList.add(new Dog(name, breed, age, weight));
 		System.out.println(name + " added to the register");
 	}
-	
+
 	/*
 	public ArrayList<Dog> getDogs() {
 		return dogList;

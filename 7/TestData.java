@@ -5,7 +5,7 @@
  * metoder som du själv får namnge. Många av JUnit-testfallen till
  * inlämingsuppgiftens olika delar behöver kunna identifiera dessa, och de
  * kommer att leta efter namnen här.
- * 
+ *
  * De konstanter som finns nedan är de som behövs för testen till U6.3,
  * inläsningsklassen och . Du kommer själv att behöva lägga till ytterligare
  * konstanter i filen när du går in på uppgifterna till föreläsning 7 och
@@ -31,12 +31,12 @@ public final class TestData {
   public static final String DOG_LIST_CLASS_ADD_DOG_METHOD_NAME = "add";
   public static final String DOG_LIST_CLASS_REMOVE_DOG_METHOD_NAME = "remove";
   public static final String DOG_LIST_CLASS_DOG_EXISTS_METHOD_NAME = "dogExists";
-  
+
   public static final String SWAP_DOGS_OWN_METHOD_NAME = "swapDogs";
   public static final String SWAP_DOGS_USING_CLASS_LIBRARY_METHOD_NAME = "swapDogsWithCollections";
   public static final String FIND_SMALLEST_METHOD_NAME = "findSmallestDog";
   public static final String SORT_DOGS_METHOD_NAME = "sortDogs";
-  
+
 
 	// Här lägger du in ytterligare konstanter när uppgiftsinstruktionerna ber om
 	// det.

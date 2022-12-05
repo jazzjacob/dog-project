@@ -8,7 +8,7 @@ public class Dog {
 	private int age;
 	private int weight;
 	private double tailLength;
-	
+
 	public Dog(
 		String name,
 		String breed,
@@ -21,7 +21,7 @@ public class Dog {
 		this.weight = weight;
 		this.tailLength = calculateTailLength(age, weight);
 	}
-	
+
 	private double calculateTailLength(int age, int weight) {
 		String[] dachshundInDifferentLanguages = {"tax", "dachshund", "mäyräkoira", "teckel"};
 		final double DACHSHUND_TAIL_LENGTH = 3.7;
@@ -35,9 +35,9 @@ public class Dog {
 		double tailLengthRoundedIsh = Math.round(tailLength * 10) / 10.0;
 		return tailLengthRoundedIsh;
 	}
-	
+
 	public String toString() {
-		return 
+		return
 			name + " " +
 			"(" + breed +
 			", " + age +
@@ -45,31 +45,31 @@ public class Dog {
 			", " + weight +
 			" kilo, " + tailLength +
 			" cm tail, " + "no owner" +
-			")";	
+			")";
 	}
-	
+
 	public void increaseAge() {
 		++age;
 		tailLength = calculateTailLength(age, weight);
 	}
-	
+
 	public double getTailLength() {
 		return this.tailLength;
 	}
-	
+
 	public String getTailLengthString() {
 		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		return numberFormat.format(this.tailLength);
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getBreed() {
 		return breed;
 	}
-	
+
 	public int getAge() {
 		return age;
 	}

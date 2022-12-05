@@ -1,4 +1,4 @@
-// Jacob Reinikainen Lindström, jare2673
+// Jacob Reinikainen Lindström, jare2473
 
 /**
  * Denna klass är bara till för att möjliggöra testning av de klasser och
@@ -21,8 +21,22 @@ public final class TestData {
   public static final String READ_TEXT_METHOD_NAME = "string";
   public static final String READ_INTEGER_METHOD_NAME = "integer";
   public static final String READ_DECIMAL_METHOD_NAME = "decimal";
-  public static final String MAIN_DOG_LIST_NAME = "DOGS";
+  public static final String MAIN_DOG_LIST_NAME = "dogList";
   public static final String REGISTER_NEW_DOG_METHOD_NAME = "registerNewDog";
+  public static final String LIST_DOGS_METHOD_NAME = "listDogs";
+  public static final String FIND_DOG_METHOD_NAME = "findDogInRegisterByName";
+  public static final String INCREASE_AGE_METHOD_NAME = "increaseAge";
+  public static final String REMOVE_DOG_METHOD_NAME = "removeDog";
+  public static final String DOG_LIST_CLASS_NAME = "DogList";
+  public static final String DOG_LIST_CLASS_ADD_DOG_METHOD_NAME = "add";
+  public static final String DOG_LIST_CLASS_REMOVE_DOG_METHOD_NAME = "remove";
+  public static final String DOG_LIST_CLASS_DOG_EXISTS_METHOD_NAME = "dogExists";
+  
+  public static final String SWAP_DOGS_OWN_METHOD_NAME = "swapDogs";
+  public static final String SWAP_DOGS_USING_CLASS_LIBRARY_METHOD_NAME = "swapDogsWithCollections";
+  public static final String FIND_SMALLEST_METHOD_NAME = "findSmallestDog";
+  public static final String SORT_DOGS_METHOD_NAME = "sortDogs";
+  
 
 	// Här lägger du in ytterligare konstanter när uppgiftsinstruktionerna ber om
 	// det.

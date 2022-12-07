@@ -39,6 +39,7 @@ public final class TestData {
   
   public static final String MAIN_OWNER_LIST_NAME = "ownerList";
   public static final String REGISTER_NEW_OWNER_METHOD_NAME = "registerNewOwner";
+  public static final String FIND_OWNER_METHOD_NAME = "findOwnerInRegister";
 
 
 	// Här lägger du in ytterligare konstanter när uppgiftsinstruktionerna ber om

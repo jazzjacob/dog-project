@@ -1,5 +1,14 @@
 public class Main {
 	public static void main(String args[]) {
+		Owner owner = new Owner("Steffe");
+		System.out.println(owner);
+		
+		AssignmentEightPointOne tjabba = new AssignmentEightPointOne();
+		tjabba.registerNewOwner();
+		
+		
+		
+		/*
 		AssignmentSevenPointOne hello = new AssignmentSevenPointOne();
 		AssignmentSevenPointThree hej = new AssignmentSevenPointThree();
 		DogList dogList = new DogList();
@@ -28,6 +37,7 @@ public class Main {
 
 
 		howdy.listDogs();
+		*/
 
 		// hello.registerNewDog();
 	}

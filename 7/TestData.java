@@ -36,6 +36,9 @@ public final class TestData {
   public static final String SWAP_DOGS_USING_CLASS_LIBRARY_METHOD_NAME = "swapDogsWithCollections";
   public static final String FIND_SMALLEST_METHOD_NAME = "findSmallestDog";
   public static final String SORT_DOGS_METHOD_NAME = "sortDogs";
+  
+  public static final String MAIN_OWNER_LIST_NAME = "ownerList";
+  public static final String REGISTER_NEW_OWNER_METHOD_NAME = "registerNewOwner";
 
 
 	// Här lägger du in ytterligare konstanter när uppgiftsinstruktionerna ber om

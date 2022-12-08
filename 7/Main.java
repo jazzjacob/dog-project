@@ -1,11 +1,15 @@
 public class Main {
 	public static void main(String args[]) {
+		
+		AssignmentEightPointThree hello = new AssignmentEightPointThree();
+		
+		/*
 		Owner owner = new Owner("Steffe");
 		System.out.println(owner);
 		
 		AssignmentEightPointOne tjabba = new AssignmentEightPointOne();
 		tjabba.registerNewOwner();
-		
+		*/
 		
 		
 		/*

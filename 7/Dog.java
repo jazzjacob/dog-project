@@ -8,6 +8,7 @@ public class Dog {
 	private int age;
 	private int weight;
 	private double tailLength;
+	private String owner;
 
 	public Dog(
 		String name,
@@ -72,5 +73,14 @@ public class Dog {
 
 	public int getAge() {
 		return age;
+	}
+	
+	public boolean addOwner(String name) {
+		if (owner.length() > 0) {
+			return false;
+		} else {
+			owner = name;
+			return true;			
+		}
 	}
 }

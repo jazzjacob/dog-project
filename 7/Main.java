@@ -1,7 +1,17 @@
 public class Main {
 	public static void main(String args[]) {
 		
+		System.out.println("Fuck off");
 		AssignmentEightPointThree hello = new AssignmentEightPointThree();
+		System.out.println("Register new dog");
+		hello.registerNewDog();
+		System.out.println("\nRegister new owner");
+		hello.registerNewOwner();
+		System.out.println("\nGive dog");
+		hello.giveDog();
+		
+		
+		hello.giveDog();
 		
 		/*
 		Owner owner = new Owner("Steffe");

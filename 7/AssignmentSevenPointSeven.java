@@ -96,4 +96,10 @@ public class AssignmentSevenPointSeven {
 			System.out.println(dog.getName());
 		}
 	}
+	
+	public void listOwners() {
+		for (Owner owner : ownerList) {
+			System.out.println(owner.getName()  + " " + owner.getDogs());
+		}
+	}
 }

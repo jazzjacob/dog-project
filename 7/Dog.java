@@ -8,7 +8,7 @@ public class Dog {
 	private int age;
 	private int weight;
 	private double tailLength;
-	private String owner;
+	private Owner owner;
 
 	public Dog(
 		String name,
@@ -75,12 +75,20 @@ public class Dog {
 		return age;
 	}
 	
-	public boolean addOwner(String name) {
-		if (owner.length() > 0) {
-			return false;
+	public boolean addOwner(Owner owner) {
+		if (this.owner == null) {
+			this.owner = owner;
+			owner.addDog(this);
+			return true;
 		} else {
-			owner = name;
-			return true;			
+			return false;
 		}
+	}
+	
+	public String getOwner() {
+		if (this.owner != null) {
+			return owner.getName();	
+		}
+		return "";
 	}
 }

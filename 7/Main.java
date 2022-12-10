@@ -2,7 +2,9 @@ public class Main {
 	public static void main(String args[]) {
 		
 		System.out.println("Fuck off");
-		AssignmentEightPointThree hello = new AssignmentEightPointThree();
+		AssignmentEightPointFour hello = new AssignmentEightPointFour();
+		System.out.println("Register new dog");
+		hello.registerNewDog();
 		System.out.println("Register new dog");
 		hello.registerNewDog();
 		System.out.println("\nRegister new owner");
@@ -13,6 +15,8 @@ public class Main {
 		
 		hello.giveDog();
 		hello.listDogs();
+		System.out.println("List owners: ");
+		hello.listOwners();
 		
 		/*
 		Owner owner = new Owner("Steffe");

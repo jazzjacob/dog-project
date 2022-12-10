@@ -71,4 +71,14 @@ public class DogList {
 		}
 	}
 	
+	public String toString() {
+		String dogListString = "";
+		for (int i = 0 ; i < dogList.length ; i++) {
+			dogListString += dogList[i].getName();
+			if (i != dogList.length - 1) {
+				dogListString += ", ";
+			}
+		}
+		return dogListString;
+	}
 }

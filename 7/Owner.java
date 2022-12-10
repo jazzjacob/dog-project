@@ -43,4 +43,8 @@ public class Owner {
 	public void printCoolThing() {
 		System.out.println("Wazzup");
 	}
+	
+	public DogList getDogs() {
+		return dogs;
+	}
 }

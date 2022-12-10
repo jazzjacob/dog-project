@@ -44,6 +44,9 @@ public final class TestData {
   public static final String GIVE_DOG_METHOD_NAME = "giveDog";
   public static final String SET_OWNER_OF_DOG_METHOD_NAME = "addOwner";
   public static final String ADD_DOG_TO_OWNER_METHOD_NAME = "addDog";
+  
+  public static final String LIST_OWNERS_METHOD_NAME = "listOwners";
+  
 
 
 	// Här lägger du in ytterligare konstanter när uppgiftsinstruktionerna ber om

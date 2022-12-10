@@ -38,15 +38,26 @@ public class Dog {
 	}
 
 	public String toString() {
-		return
-			name + " " +
-			"(" + breed +
-			", " + age +
-			" years" +
-			", " + weight +
-			" kilo, " + tailLength +
-			" cm tail, " + "no owner" +
-			")";
+		if (owner == null) {
+			return
+				name + " " +
+				"(" + breed +
+				", " + age +
+				" years" +
+				", " + weight +
+				" kilo, " + tailLength +
+				" cm tail" + ")";
+		} else {
+			return
+				name + " " +
+				"(" + breed +
+				", " + age +
+				" years" +
+				", " + weight +
+				" kilo, " + tailLength +
+				" cm tail," + " owned by " +
+				owner.getName() + ")";
+		}
 	}
 
 	public void increaseAge() {

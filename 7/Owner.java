@@ -10,10 +10,22 @@ public class Owner {
 	}
 	
 	public void addDog(Dog dog) {
-		if (dogs.dogExists(dog)) {
-			dog.addOwner(this);			
+		if (dog != null) {
+			if (dog.getOwnerName().length() == 0) {
+				dog.addOwner(this);	
+			}
+			
+			if (!dogs.dogExists(dog) && dog.getOwner().equals(this)) {
+				// System.out.println("Dogs owner: " + dog.getOwner());
+				// System.out.println("This: " + this);
+				dogs.add(dog);
+			}
 		}
-		dogs.add(dog);
+		// Add owner to dog if dog already exists and does not have owner yet.
+		/*if (dogs.dogExists(dog) && dog.getOwnerNameName().length() == 0) {
+			dog.addOwner(this);	
+		}*/
+		
 	}
 
 	public String toString() {

@@ -12,6 +12,7 @@ public class Main {
 		
 		
 		hello.giveDog();
+		hello.listDogs();
 		
 		/*
 		Owner owner = new Owner("Steffe");

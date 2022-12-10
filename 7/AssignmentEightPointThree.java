@@ -8,27 +8,37 @@ public class AssignmentEightPointThree {
 	private UserInput input = new UserInput();
 	
 	public void addDogToOwner(Owner owner, Dog dog) {
-		owner.addDog(dog);
+		//owner.addDog(dog);
 	}
 
 	public void setOwnerToDog(Owner owner, Dog dog) {
-		//dog.addOwner(owner);
+		dog.addOwner(owner);
+	}
+	
+	private String getFormattedStringFromUser(String userPrompt, String errorMessage) {
+		String string = input.string(userPrompt);
+		string = formatString(string);
+		while (string.length() == 0) {
+			printError(errorMessage);
+			string = input.string(userPrompt);
+			string = formatString(string);
+		}
+		return string;
 	}
 	
 	public void giveDog() {
-		String dogName = input.string("Enter the name of the dog");
-		dogName = formatString(dogName);
+		String dogName = getFormattedStringFromUser("Enter the name of the dog", "the name can't be empty");
+
 		Dog dog = findDogInRegisterByName(dogName);
 		
 		// Check if dog exists and doesn't have owner
 		if (dog == null) {
 			System.out.println("Error: no dog with that name");
 		} else {
-			if (dog.getOwner().length() > 0) {
+			if (dog.getOwnerName().length() > 0) {
 				System.out.println("Error: the dog already has an owner");
 			} else {
-				String ownerName = input.string("Enter the name of the owner");
-				ownerName = formatString(ownerName);
+				String ownerName = getFormattedStringFromUser("Enter the name of the owner", "the name can't be empty");
 				Owner owner = findOwnerInRegister(ownerName);
 				
 				if (owner != null) {

@@ -76,7 +76,7 @@ public class Dog {
 	}
 	
 	public boolean addOwner(Owner owner) {
-		if (this.owner == null) {
+		if (this.owner == null && owner != null) {
 			this.owner = owner;
 			owner.addDog(this);
 			return true;
@@ -85,10 +85,17 @@ public class Dog {
 		}
 	}
 	
-	public String getOwner() {
+	public String getOwnerName() {
+		//System.out.println("Getting owner...");
 		if (this.owner != null) {
-			return owner.getName();	
+			//System.out.println("Owner exists!");
+			return owner.getName();
 		}
+		//System.out.println("No owner exists.");
 		return "";
+	}
+	
+	public Owner getOwner() {
+		return this.owner;
 	}
 }

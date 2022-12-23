@@ -86,6 +86,10 @@ public class Dog {
 		return age;
 	}
 	
+	public int getWeight() {
+		return weight;
+	}
+	
 	public boolean addOwner(Owner owner) {
 		if (this.owner == null && owner != null) {
 			this.owner = owner;
@@ -108,5 +112,14 @@ public class Dog {
 	
 	public Owner getOwner() {
 		return this.owner;
+	}
+	
+	public void removeOwner() {
+		Owner ownerCopy = this.owner;
+		this.owner = null;
+		
+		if (ownerCopy != null && ownerCopy.ownsDog(this)) {
+			ownerCopy.removeDog(this);
+		}
 	}
 }

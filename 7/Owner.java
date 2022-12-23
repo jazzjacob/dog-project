@@ -9,6 +9,7 @@ public class Owner {
 		this.dogs  = new DogList();
 	}
 	
+	//
 	public void addDog(Dog dog) {
 		if (dog != null) {
 			if (dog.getOwnerName().length() == 0) {
@@ -16,35 +17,48 @@ public class Owner {
 			}
 			
 			if (!dogs.dogExists(dog) && dog.getOwner().equals(this)) {
-				// System.out.println("Dogs owner: " + dog.getOwner());
-				// System.out.println("This: " + this);
 				dogs.add(dog);
 			}
 		}
-		// Add owner to dog if dog already exists and does not have owner yet.
-		/*if (dogs.dogExists(dog) && dog.getOwnerNameName().length() == 0) {
-			dog.addOwner(this);	
-		}*/
 		
 	}
-
+	
 	public String toString() {
 		return name;
 	}
 	
-	public void listDogs() {
+	/*private void listDogs() {
 		dogs.print();
-	}
-
+	}*/
+	
+	//
 	public String getName() {
 		return name;
 	}
 	
-	public void printCoolThing() {
-		System.out.println("Wazzup");
+	//
+	/*public Dog[] getDogs() {
+		return dogs.getDogs();
+	}*/
+	
+	//
+	public DogList getDogsString() {
+		return dogs;
 	}
 	
-	public DogList getDogs() {
-		return dogs;
+	public boolean ownsDog(Dog dog) {
+		boolean dogExists = dogs.dogExists(dog);
+		return dogExists;
+	}
+	
+	//
+	public void removeDog(Dog dog) {
+		if (ownsDog(dog) && dog.getOwner() != null) {
+			// System.out.println("HERE WE ARE");
+			dog.removeOwner();
+		}
+		if (ownsDog(dog)) {
+			dogs.remove(dog);			
+		}
 	}
 }

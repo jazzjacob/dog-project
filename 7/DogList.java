@@ -54,8 +54,8 @@ public class DogList {
 	
 	public void remove(Dog dogToRemove) {
 		if (dogToRemove != null && dogExists(dogToRemove)) {
+			dogToRemove.removeOwner();
 			int index = findDog(dogToRemove.getName());
-		
 			// Copy dogList to reduced dogList without the dog to remove
 			if (index == -1) {
 				System.out.println("Error: no dog with that name");
@@ -81,4 +81,11 @@ public class DogList {
 		}
 		return dogListString;
 	}
+	
+	/*
+	public Dog[] getDogs() {
+		Dog[] dogListCopy = new Dog[dogList.length];
+		System.arraycopy(dogList, 0, dogListCopy, 0, dogList.length);
+		return dogListCopy;
+	} */
 }

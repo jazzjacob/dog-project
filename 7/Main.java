@@ -1,8 +1,10 @@
 public class Main {
 	public static void main(String args[]) {
 		
+		
+
 		System.out.println("Fuck off");
-		AssignmentEightPointFour hello = new AssignmentEightPointFour();
+		AssignmentEightPointEight hello = new AssignmentEightPointEight();
 		System.out.println("Register new dog");
 		hello.registerNewDog();
 		System.out.println("Register new dog");
@@ -11,12 +13,29 @@ public class Main {
 		hello.registerNewOwner();
 		System.out.println("\nGive dog");
 		hello.giveDog();
-		
-		
 		hello.giveDog();
+		
+		System.out.println("List dogs: ");
 		hello.listDogs();
 		System.out.println("List owners: ");
 		hello.listOwners();
+		System.out.println("Remove dog: ");
+		hello.removeDog();
+		hello.listDogs();
+		hello.listOwners();
+		
+		
+		/*
+		Owner jacob = new Owner("Jacob");
+		Dog dobby = new Dog("Dobby", "Tax", 12, 12);
+		Dog fallsmannen = new Dog("Fallsmannen", "Tax", 12, 12);
+		jacob.addDog(dobby);
+		System.out.println(jacob);
+		jacob.listDogs();
+		boolean jacobOwnsFallsmannen = jacob.ownsDog(fallsmannen);
+		System.out.println(jacobOwnsFallsmannen ? "Jacob owns fallsmannen!" : "Jacob doesn't own fallsmannen...");
+		*/
+		
 		
 		/*
 		Owner owner = new Owner("Steffe");

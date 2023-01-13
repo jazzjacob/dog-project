@@ -56,5 +56,4 @@ public class UserInput {
 		}
 		return string;
 	}
-	
 } 

@@ -6,7 +6,7 @@ public class Owner {
 
 	public Owner(String name) {
 		this.name = name;
-		this.dogs  = new DogList();
+		this.dogs = new DogList();
 	}
 	
 	//
@@ -20,7 +20,6 @@ public class Owner {
 				dogs.add(dog);
 			}
 		}
-		
 	}
 	
 	public String toString() {

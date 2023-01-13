@@ -81,11 +81,4 @@ public class DogList {
 		}
 		return dogListString;
 	}
-	
-	/*
-	public Dog[] getDogs() {
-		Dog[] dogListCopy = new Dog[dogList.length];
-		System.arraycopy(dogList, 0, dogListCopy, 0, dogList.length);
-		return dogListCopy;
-	} */
 }

@@ -61,7 +61,7 @@ public class DogRegister {
 				return 1;
 		}
 		int nameComparisonResult = compareDogNames(dogOne, dogTwo);
-		 if (0 < nameComparisonResult) {
+		if (0 < nameComparisonResult) {
 			return 1;
 		} else {
 			return -1;
@@ -106,32 +106,32 @@ public class DogRegister {
 	
 	private void removeOwner() {
 		Owner owner = findOwnerByInput();
-		if (owner != null) {
-			removeDogsFromOwner(owner);
-			ownerList.remove(owner);
-			output.println(owner.getName() + " was removed from the register");
-		} else {
+		if (owner == null) {
 			output.error("no such owner");
+			return;
 		}
+		removeDogsFromOwner(owner);
+		ownerList.remove(owner);
+		output.println(owner.getName() + " was removed from the register");
 	}
 	
 	private void removeDogFromOwner(Dog dog) {
 		Owner owner = dog.getOwner();
-		if (dog.getOwner() != null) {
-			owner.removeDog(dog);
-			output.println(dog.getName() + " was removed from " + owner.getName());     
-		} else {
+		if (dog.getOwner() == null) {
 			output.error(dog.getName() + " is not owned by anyone");
+			return;
 		}
+		owner.removeDog(dog);
+		output.println(dog.getName() + " was removed from " + owner.getName());
 	}
 	
 	private void removeOwnedDog() {
 		Dog dog = findDogByInput();
-		if (dog != null) {
-			removeDogFromOwner(dog);    
-		} else {
+		if (dog == null) {
 			output.print("no such dog");
+			return;
 		}
+		removeDogFromOwner(dog);
 	}
 	
 	private Owner findOwnerInRegister(String nameToFind) {
@@ -172,10 +172,10 @@ public class DogRegister {
 	private void listOwners() {
 		if (ownerList.size() == 0) {
 			output.error("no owners registered");
-		} else {
-			for (Owner owner : ownerList) {
-				output.println(owner.getName()  + " [" + owner.getDogsString() + "]");
-			}
+			return;
+		}
+		for (Owner owner : ownerList) {
+			output.println(owner.getName()  + " [" + owner.getDogsString() + "]");
 		}
 	}
 	
@@ -193,11 +193,11 @@ public class DogRegister {
 		Dog dog = findDogByInput();
 		if (dog == null) {
 			output.error("no such name");
-		} else {
-			dog.removeOwner();
-			dogList.remove(dog);
-			output.println(dog.getName() + " was removed from the register");
+			return;
 		}
+		dog.removeOwner();
+		dogList.remove(dog);
+		output.println(dog.getName() + " was removed from the register");
 	}
 	
 	private Dog findDogInRegisterByName(String nameToFind) {
@@ -223,10 +223,10 @@ public class DogRegister {
 		Dog dog = findDogByInput();
 		if (dog == null) {
 			output.error("no such dog");
-		} else {
-			dog.increaseAge();
-			output.println(dog.getName() + " is now one year older");
+			return;
 		}
+		dog.increaseAge();
+		output.println(dog.getName() + " is now one year older");
 	}
 	
 	private String addDogsToListByTailLength() {

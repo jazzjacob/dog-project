@@ -2,6 +2,15 @@
 import java.util.ArrayList;
 
 public class DogRegister {
+	private static final String REGISTER_NEW_DOG_COMMAND = "register new dog";
+	private static final String LIST_DOGS_COMMAND = "list dogs";
+	private static final String INCREASE_AGE_COMMAND = "increase age";
+	private static final String REMOVE_DOG_COMMAND = "remove dog";
+	private static final String REGISTER_NEW_OWNER_COMMAND = "register new owner";
+	private static final String GIVE_DOG_COMMAND = "give dog";
+	private static final String LIST_OWNERS_COMMAND = "list owners";
+	private static final String REMOVE_OWNED_DOG_COMMAND = "remove owned dog";
+	private static final String REMOVE_OWNER_COMMAND = "remove owner";
 	private static final String EXIT_COMMAND = "exit";
 	
 	private ArrayList<Owner> ownerList = new ArrayList<Owner>();
@@ -9,7 +18,7 @@ public class DogRegister {
 	private UserInput input = new UserInput();
 	private Output output = new Output();
 	
-	public void swapDogs(int indexOne, int indexTwo) {
+	private void swapDogs(int indexOne, int indexTwo) {
 		Dog placeholder = dogList.get(indexOne);
 		dogList.set(indexOne, dogList.get(indexTwo));
 		dogList.set(indexTwo, placeholder);
@@ -61,7 +70,7 @@ public class DogRegister {
 	
 	// Finds "smallest" dog in dogList starting from currentIndex
 	// Returns index of smallest dog found
-	public int findSmallestDog(int currentIndex) {
+	private int findSmallestDog(int currentIndex) {
 		Dog currentMin = dogList.get(currentIndex);
 		int currentMinIndex = currentIndex;
 		for (int i = currentIndex + 1 ; i < dogList.size() ; i++) {
@@ -73,7 +82,7 @@ public class DogRegister {
 		return currentMinIndex;
 	}
 	
-	public int sortDogs() {
+	private int sortDogs() {
 		int numberOfSwaps = 0;
 		for (int i = 0 ; i < dogList.size() ; i++) {
 			int smallestDogIndex = findSmallestDog(i);
@@ -258,7 +267,7 @@ public class DogRegister {
 		output.println(name + " added to the register");
 	}
 	
-	public void printCommandMenu() {
+	private void printCommandMenu() {
 		output.println(
 			"The following commands are available:" +
 			"\n* register new dog" +
@@ -274,45 +283,26 @@ public class DogRegister {
 		);
 	}
 	
-	public void sayFarewell() {
+	private void sayFarewell() {
 		output.println("Välkommen åter!");
 	}
 	
 	private void handleCommand(String userCommand) {
 		switch(userCommand) {
-			case "register new dog":
-				registerNewDog();
-				break;
-			case "list dogs":
-				listDogs();
-				break;
-			case "increase age":
-				increaseAge();
-				break;
-			case "remove dog":
-				removeDog();
-				break;
-			case "register new owner":
-				registerNewOwner();
-				break;
-			case "give dog":
-				giveDog();
-				break;
-			case "list owners":
-				listOwners();
-				break;
-			case "remove owned dog":
-				removeOwnedDog();
-				break;
-			case "remove owner":
-				removeOwner();
-				break;
-			case EXIT_COMMAND:
-				break;
-			default:
+			case REGISTER_NEW_DOG_COMMAND -> registerNewDog();
+			case LIST_DOGS_COMMAND -> listDogs();
+			case INCREASE_AGE_COMMAND -> increaseAge();
+			case REMOVE_DOG_COMMAND -> removeDog();
+			case REGISTER_NEW_OWNER_COMMAND -> registerNewOwner();
+			case GIVE_DOG_COMMAND -> giveDog();
+			case LIST_OWNERS_COMMAND -> listOwners();
+			case REMOVE_OWNED_DOG_COMMAND -> removeOwnedDog();
+			case REMOVE_OWNER_COMMAND -> removeOwner();
+			case EXIT_COMMAND -> {}
+			default -> {
 				output.error("command not valid");
 				printCommandMenu();
-				break;
+			}
 		}
 	}
 	
@@ -334,14 +324,9 @@ public class DogRegister {
 	}
 		
 	private void run() {
-		// addDogs();
 		sayHello();
 		runCommandLoop();
 		exitProgram();
-	}
-	
-	private void addDogs() {
-		dogList.add(new Dog("Hans", "Tax", 1, 2));
 	}
 	
 	public static void main(String[] args) {

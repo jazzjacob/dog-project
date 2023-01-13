@@ -9,7 +9,6 @@ public class Dog {
 	private String breed;
 	private int age;
 	private int weight;
-	private double tailLength;
 	private Owner owner;
 
 	public Dog(
@@ -22,10 +21,9 @@ public class Dog {
 		this.breed = breed;
 		this.age = age;
 		this.weight = weight;
-		this.tailLength = calculateTailLength();
 	}
 
-	private double calculateTailLength() {
+	public double getTailLength() {
 		String[] dachshundInDifferentLanguages = {"tax", "dachshund", "mäyräkoira", "teckel"};
 		String breed = getBreed();
 		for (String d : dachshundInDifferentLanguages) {
@@ -34,45 +32,28 @@ public class Dog {
 			}
 		}
 		double tailLength = this.age * (this.weight / 10.0);
-		double tailLengthRoundedIsh = Math.round(tailLength * 10) / 10.0;
-		return tailLengthRoundedIsh;
+		double tailLengthRounded = Math.round(tailLength * 10) / 10.0;
+		return tailLengthRounded;
 	}
-
+	
 	public String toString() {
 		if (owner == null) {
 			return
-				name + " " +
-				"(" + breed +
-				", " + age +
-				" years" +
-				", " + weight +
-				" kilo, " + tailLength +
-				" cm tail" + ")";
+				String.format(
+					"%s (%s), %d years, %d cm tail, %.1f, no owner",
+					name, breed, age, weight, getTailLength()
+				);
 		} else {
 			return
-				name + " " +
-				"(" + breed +
-				", " + age +
-				" years" +
-				", " + weight +
-				" kilo, " + tailLength +
-				" cm tail," + " owned by " +
-				owner.getName() + ")";
+				String.format(
+					"%s (%s), %d, %d years cm tail, %.1f, owned by %s",
+					name, breed, age, weight, getTailLength(), owner.getName()
+				);
 		}
 	}
 
 	public void increaseAge() {
-		++age;
-		tailLength = calculateTailLength();
-	}
-
-	public double getTailLength() {
-		return this.tailLength;
-	}
-
-	public String getTailLengthString() {
-		DecimalFormat numberFormat = new DecimalFormat("#.00");
-		return numberFormat.format(this.tailLength);
+		age++;
 	}
 
 	public String getName() {
@@ -102,12 +83,9 @@ public class Dog {
 	}
 	
 	public String getOwnerName() {
-		//System.out.println("Getting owner...");
 		if (this.owner != null) {
-			//System.out.println("Owner exists!");
 			return owner.getName();
 		}
-		//System.out.println("No owner exists.");
 		return "";
 	}
 	

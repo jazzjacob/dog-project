@@ -1,0 +1,31 @@
+DogRegister.java
+* Ta bort addDogs()
+* Ändra till Aris sätt att göra switch sats
+* Ändra namn på sayFarewell() och sayHello() så att det är tydligare
+	att det handlar om kommunikation med användare
+
+Dog.java
+* Ändra addOwner() till setOwner()
+* Formatera toString() bättre
+* Ta bort onödiga kommentarer
+* calculateTailLength behöver inte parametrar
+* Kanske ändra namn till calculateTailLength till getTailLength eftersom den returnerar tailLength,
+	alternativt ändra till setTailLength och ändra så att den sätter tailLength utan att returnera nåt
+
+Owner.java
+* Fixa nested if-satser
+
+DogList.java
+- Ändra System.out.print till output
+- Nested if satsar
+- Ta bort onödiga kommentarer
+
+
+
+- Ända "add" to "set" där det passar
+- metodnamnet add() i DogList
+- Ta bort swaps i sortDogs()
+- Sort dogs -1 kan man ändra det till komstanter?? Magic numbers??
+
+- Kolla vilka metoder som ska vara privata och publika
+- Kolla metodordning

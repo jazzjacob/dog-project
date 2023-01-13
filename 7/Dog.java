@@ -3,6 +3,8 @@
 import java.text.DecimalFormat;
 
 public class Dog {
+	final double DACHSHUND_TAIL_LENGTH = 3.7;
+	
 	private String name;
 	private String breed;
 	private int age;
@@ -20,19 +22,18 @@ public class Dog {
 		this.breed = breed;
 		this.age = age;
 		this.weight = weight;
-		this.tailLength = calculateTailLength(age, weight);
+		this.tailLength = calculateTailLength();
 	}
 
-	private double calculateTailLength(int age, int weight) {
+	private double calculateTailLength() {
 		String[] dachshundInDifferentLanguages = {"tax", "dachshund", "mäyräkoira", "teckel"};
-		final double DACHSHUND_TAIL_LENGTH = 3.7;
 		String breed = getBreed();
 		for (String d : dachshundInDifferentLanguages) {
 			if (breed.equalsIgnoreCase(d)) {
 				return DACHSHUND_TAIL_LENGTH;
 			}
 		}
-		double tailLength = age * (weight / 10.0);
+		double tailLength = this.age * (this.weight / 10.0);
 		double tailLengthRoundedIsh = Math.round(tailLength * 10) / 10.0;
 		return tailLengthRoundedIsh;
 	}
@@ -62,7 +63,7 @@ public class Dog {
 
 	public void increaseAge() {
 		++age;
-		tailLength = calculateTailLength(age, weight);
+		tailLength = calculateTailLength();
 	}
 
 	public double getTailLength() {
@@ -90,7 +91,7 @@ public class Dog {
 		return weight;
 	}
 	
-	public boolean addOwner(Owner owner) {
+	public boolean setOwner(Owner owner) {
 		if (this.owner == null && owner != null) {
 			this.owner = owner;
 			owner.addDog(this);

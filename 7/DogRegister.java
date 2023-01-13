@@ -168,7 +168,7 @@ public class DogRegister {
 	}
 	
 	private void connectDogAndOwner(Owner owner, Dog dog) {
-		dog.addOwner(owner);
+		dog.setOwner(owner);
 		output.println(dog.getName() + " was given to " + owner.getName());
 	}
 	
@@ -286,7 +286,7 @@ public class DogRegister {
 		);
 	}
 	
-	private void sayFarewell() {
+	private void sayFarewellToUser() {
 		output.println("Välkommen åter!");
 	}
 	
@@ -317,17 +317,17 @@ public class DogRegister {
 		} while (!userCommand.equals(EXIT_COMMAND));
 	}
 	
-	private void sayHello() {
+	private void greetUser() {
 		output.println("\nWelcome!\n");
 		printCommandMenu();
 	}
 	
 	private void exitProgram() {
-		sayFarewell();
+		sayFarewellToUser();
 	}
 		
 	private void run() {
-		sayHello();
+		greetUser();
 		runCommandLoop();
 		exitProgram();
 	}

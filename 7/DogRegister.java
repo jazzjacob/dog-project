@@ -13,6 +13,14 @@ public class DogRegister {
 	private static final String REMOVE_OWNER_COMMAND = "remove owner";
 	private static final String EXIT_COMMAND = "exit";
 	
+	private static final int DOG_ONE_HAS_SHORTEST_TAIL = -1;
+	private static final int DOG_TWO_HAS_SHORTEST_TAIL = 1;
+	private static final int DOGS_HAVE_SAME_TAIL_LENGTH = 0;
+	
+	private static final int DOG_ONE_SHOULD_BE_FIRST_IN_LIST = -1;
+	private static final int DOG_TWO_SHOULD_BE_FIRST_IN_LIST = 1;
+	private static final int DOGS_HAVE_SAME_NAME = 0;
+	
 	private ArrayList<Owner> ownerList = new ArrayList<Owner>();
 	private ArrayList<Dog> dogList = new ArrayList<Dog>();
 	private UserInput input = new UserInput();
@@ -30,12 +38,12 @@ public class DogRegister {
 	// Returns 1 if dogTwo has shortest tail
 	private int compareTailLength(Dog dogOne, Dog dogTwo) {
 		if (dogOne.getTailLength() < dogTwo.getTailLength()) {
-			return -1;
-		} else if (dogOne.getTailLength() > dogTwo.getTailLength()) {
-			return 1;
-		} else {
-			return 0;
+			return DOG_ONE_HAS_SHORTEST_TAIL;
 		}
+		if (dogOne.getTailLength() > dogTwo.getTailLength()) {
+			return DOG_TWO_HAS_SHORTEST_TAIL;
+		}
+		return DOGS_HAVE_SAME_TAIL_LENGTH;
 	}
 	
 	// Compare dog names alphabetically
@@ -50,22 +58,20 @@ public class DogRegister {
 	}
 	
 	// Compares two dogs
-	// Returns -1 if dogOne should be first in list, or if the dogs are equal
+	// Returns -1 if dogOne should be first in list
 	// Returns 1 if dogTwo should be first in list
 	private int compareDogs(Dog dogOne, Dog dogTwo) {
 		int tailLengthComparison = compareTailLength(dogOne, dogTwo);
 		switch (tailLengthComparison) {
-			case -1:
-				return -1;
-			case 1:
-				return 1;
+			case DOG_ONE_HAS_SHORTEST_TAIL -> { return DOG_ONE_SHOULD_BE_FIRST_IN_LIST; }
+			case DOG_TWO_HAS_SHORTEST_TAIL -> { return DOG_TWO_SHOULD_BE_FIRST_IN_LIST; }
 		}
 		int nameComparisonResult = compareDogNames(dogOne, dogTwo);
-		if (0 < nameComparisonResult) {
-			return 1;
-		} else {
-			return -1;
+		boolean dogOneComesFirstAlphabetically = 0 > nameComparisonResult;
+		if (dogOneComesFirstAlphabetically) {
+			return DOG_ONE_SHOULD_BE_FIRST_IN_LIST;
 		}
+		return DOG_TWO_SHOULD_BE_FIRST_IN_LIST;
 	}
 	
 	// Finds "smallest" dog in dogList starting from currentIndex
@@ -82,16 +88,13 @@ public class DogRegister {
 		return currentMinIndex;
 	}
 	
-	private int sortDogs() {
-		int numberOfSwaps = 0;
+	private void sortDogs() {
 		for (int i = 0 ; i < dogList.size() ; i++) {
 			int smallestDogIndex = findSmallestDog(i);
 			if (i != smallestDogIndex) {
 				swapDogs(i, smallestDogIndex);
-				numberOfSwaps++;
 			}
 		}
-		return numberOfSwaps;
 	}
 	
 	private void removeDogsFromOwner(Owner owner) {

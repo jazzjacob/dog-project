@@ -2,16 +2,30 @@
 
 public class DogList {
 	private Dog[] dogList = new Dog[0];
+	private Output output = new Output();
 	
 	public void add(Dog dogToAdd) {
-		if (dogToAdd != null) {
-			if (!dogExists(dogToAdd)) {
-				Dog[] extendedDogList = new Dog[dogList.length + 1];
-				extendedDogList[dogList.length] = dogToAdd;
-				System.arraycopy(dogList, 0, extendedDogList, 0, dogList.length);
-				dogList = extendedDogList;
-			}
+		if (dogToAdd == null) {
+			return;
 		}
+		if (!dogExists(dogToAdd)) {
+			Dog[] extendedDogList = new Dog[dogList.length + 1];
+			extendedDogList[dogList.length] = dogToAdd;
+			System.arraycopy(dogList, 0, extendedDogList, 0, dogList.length);
+			dogList = extendedDogList;
+		}
+	}
+	
+	public void remove(Dog dogToRemove) {
+		if (dogToRemove == null && !dogExists(dogToRemove)) {
+			return;
+		}
+		dogToRemove.removeOwner();
+		int index = findDog(dogToRemove.getName());
+		if (index == -1) {
+			return;
+		}
+		dogList = removeDogFromArray(index);
 	}
 	
 	// Find dog in array and return index or -1 if dog not found
@@ -23,6 +37,18 @@ public class DogList {
 		}
 		return -1;
 	}
+	
+	public boolean dogExists(Dog dog) {
+		if (dog == null) {
+			return false;
+		}
+		for (Dog d : dogList) {
+			if (dog.getName().equalsIgnoreCase(d.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	// Returns a one index shorter array where a dog is removed
 	private Dog[] removeDogFromArray(int index) {
@@ -32,42 +58,20 @@ public class DogList {
 		for (int i = 0; i < dogList.length ; i++) {
 			if (i == index) {
 				indexFound = true;
-			} else {
-				if (indexFound) {
-					reducedDogList[i - 1] = dogList[i];
-				} else {
-					reducedDogList[i] = dogList[i];
-				}
+				continue;
 			}
+			if (indexFound) {
+				reducedDogList[i - 1] = dogList[i];
+				continue;
+			}
+			reducedDogList[i] = dogList[i];
 		}
 		return reducedDogList;
 	}
 	
-	public boolean dogExists(Dog dog) {
-		for (Dog d : dogList) {
-			if (dog.getName().equalsIgnoreCase(d.getName())) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public void remove(Dog dogToRemove) {
-		if (dogToRemove != null && dogExists(dogToRemove)) {
-			dogToRemove.removeOwner();
-			int index = findDog(dogToRemove.getName());
-			// Copy dogList to reduced dogList without the dog to remove
-			if (index == -1) {
-				System.out.println("Error: no dog with that name");
-			} else {
-				dogList = removeDogFromArray(index);
-			}		
-		}
-	}
-	
 	public void print() {
 		for (Dog dog : dogList) {
-			System.out.println(dog);
+			output.println(dog.toString());
 		}
 	}
 	

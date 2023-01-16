@@ -14,15 +14,20 @@ public class Owner {
 			return;
 		}
 		if (dog.getOwnerName().length() == 0) {
-			dog.addOwner(this);	
+			dog.setOwner(this);	
 		}
 		if (!dogs.dogExists(dog) && dog.getOwner().equals(this)) {
 			dogs.add(dog);
 		}
 	}
 	
-	public String toString() {
-		return name;
+	public void removeDog(Dog dog) {
+		if (ownsDog(dog) && dog.getOwner() != null) {
+			dog.removeOwner();
+		}
+		if (ownsDog(dog)) {
+			dogs.remove(dog);			
+		}
 	}
 
 	public String getName() {
@@ -34,16 +39,10 @@ public class Owner {
 	}
 	
 	public boolean ownsDog(Dog dog) {
-		boolean dogExists = dogs.dogExists(dog);
-		return dogExists;
+		return dogs.dogExists(dog);
 	}
 	
-	public void removeDog(Dog dog) {
-		if (ownsDog(dog) && dog.getOwner() != null) {
-			dog.removeOwner();
-		}
-		if (ownsDog(dog)) {
-			dogs.remove(dog);			
-		}
+	public String toString() {
+		return name;
 	}
 }

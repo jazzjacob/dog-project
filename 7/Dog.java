@@ -1,9 +1,7 @@
 // Jacob Reinikainen Lindström, jare2473
 
-import java.text.DecimalFormat;
-
 public class Dog {
-	final double DACHSHUND_TAIL_LENGTH = 3.7;
+	private static final double DACHSHUND_TAIL_LENGTH = 3.7;
 	
 	private String name;
 	private String breed;
@@ -22,7 +20,34 @@ public class Dog {
 		this.age = age;
 		this.weight = weight;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getBreed() {
+		return breed;
+	}
 
+	public int getAge() {
+		return age;
+	}
+	
+	public int getWeight() {
+		return weight;
+	}
+	
+	public Owner getOwner() {
+		return this.owner;
+	}
+	
+	public String getOwnerName() {
+		if (this.owner != null) {
+			return owner.getName();
+		}
+		return "";
+	}
+	
 	public double getTailLength() {
 		String[] dachshundInDifferentLanguages = {"tax", "dachshund", "mäyräkoira", "teckel"};
 		String breed = getBreed();
@@ -34,6 +59,29 @@ public class Dog {
 		double tailLength = this.age * (this.weight / 10.0);
 		double tailLengthRounded = Math.round(tailLength * 10) / 10.0;
 		return tailLengthRounded;
+	}
+	
+	public void increaseAge() {
+		age++;
+	}
+	
+	public boolean setOwner(Owner owner) {
+		if (this.owner == null && owner != null) {
+			this.owner = owner;
+			owner.addDog(this);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void removeOwner() {
+		Owner ownerCopy = this.owner;
+		this.owner = null;
+		
+		if (ownerCopy != null && ownerCopy.ownsDog(this)) {
+			ownerCopy.removeDog(this);
+		}
 	}
 	
 	public String toString() {
@@ -49,56 +97,6 @@ public class Dog {
 					"%s (%s), %d, %d years cm tail, %.1f, owned by %s",
 					name, breed, age, weight, getTailLength(), owner.getName()
 				);
-		}
-	}
-
-	public void increaseAge() {
-		age++;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getBreed() {
-		return breed;
-	}
-
-	public int getAge() {
-		return age;
-	}
-	
-	public int getWeight() {
-		return weight;
-	}
-	
-	public boolean setOwner(Owner owner) {
-		if (this.owner == null && owner != null) {
-			this.owner = owner;
-			owner.addDog(this);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public String getOwnerName() {
-		if (this.owner != null) {
-			return owner.getName();
-		}
-		return "";
-	}
-	
-	public Owner getOwner() {
-		return this.owner;
-	}
-	
-	public void removeOwner() {
-		Owner ownerCopy = this.owner;
-		this.owner = null;
-		
-		if (ownerCopy != null && ownerCopy.ownsDog(this)) {
-			ownerCopy.removeDog(this);
 		}
 	}
 }

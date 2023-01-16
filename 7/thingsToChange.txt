@@ -16,16 +16,16 @@ Owner.java
 * Fixa nested if-satser
 
 DogList.java
-- Ändra System.out.print till output
-- Nested if satsar
-- Ta bort onödiga kommentarer
+* Nested if satser
+* Ändra System.out.print till output
+* Ta bort onödiga kommentarer
 
 
 
-- Ända "add" to "set" där det passar
-- metodnamnet add() i DogList
-- Ta bort swaps i sortDogs()
-- Sort dogs -1 kan man ändra det till komstanter?? Magic numbers??
+* Ända "add" to "set" där det passar
+! metodnamnet add() i DogList
+* Ta bort swaps i sortDogs()
+* Sort dogs -1 kan man ändra det till konstanter?? Magic numbers??
 
-- Kolla vilka metoder som ska vara privata och publika
-- Kolla metodordning
+* Kolla vilka metoder som ska vara privata och publika
+* Kolla metodordning

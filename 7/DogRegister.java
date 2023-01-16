@@ -26,6 +26,127 @@ public class DogRegister {
 	private UserInput input = new UserInput();
 	private Output output = new Output();
 	
+	
+	/* -- METHODS THAT RUN ON USER COMMAND -- */
+	
+	private void registerNewDog() {
+		String name = input.formattedString("Name");
+		String breed = input.formattedString("Breed");
+		int age = input.integer("Age");
+		int weight = input.integer("Weight");
+	
+		dogList.add(new Dog(name, breed, age, weight));
+		output.println(name + " added to the register");
+	}
+	
+	private void listDogs() {
+		sortDogs();
+		if (dogList.size() == 0) {
+			output.error("no dogs registered");
+			return;
+		}
+		
+		String dogsToList = addDogsToListByTailLength();
+		if (dogsToList.length() == 0) {
+			output.error("no dogs with such a large tail");
+			return;
+		}
+		
+		output.print("The following dogs has such a large tail:");
+		output.println(dogsToList);
+	}
+	
+	private void increaseAge() {
+		Dog dog = findDogByInput();
+		if (dog == null) {
+			output.error("no such dog");
+			return;
+		}
+		dog.increaseAge();
+		output.println(dog.getName() + " is now one year older");
+	}
+	
+	private void removeDog() {
+		Dog dog = findDogByInput();
+		if (dog == null) {
+			output.error("no dog with that name");
+			return;
+		}
+		dog.removeOwner();
+		dogList.remove(dog);
+		output.println(dog.getName() + " was removed from the register");
+	}
+	
+	private void registerNewOwner() {
+		String name = input.formattedString("Name");
+		while (name.length() < 1) {
+			output.error("the name can't be empty");
+			name = input.formattedString("Name");
+		}
+		ownerList.add(new Owner(name));
+		output.println(name + " added to the register");
+	}
+	
+	private void giveDog() {
+		Dog dog = findDogByInput();
+		if (dog == null) {
+			output.error("no dog with that name");
+			return;
+		}
+		if (dog.getOwnerName().length() > 0) {
+			output.error("the dog already has an owner");
+			return;
+		}
+		Owner owner = findOwnerByInput();
+		if (owner == null) {
+			output.error("no such owner");
+			return;
+		}
+		connectDogAndOwner(owner, dog);
+	}
+	
+	private void listOwners() {
+		if (ownerList.size() == 0) {
+			output.error("no owners registered");
+			return;
+		}
+		for (Owner owner : ownerList) {
+			output.println(String.format("%s [%s]", owner.getName(), owner.getDogsString()));
+		}
+	}
+	
+	private void removeOwnedDog() {
+		Dog dog = findDogByInput();
+		if (dog == null) {
+			output.error("no such dog");
+			return;
+		}
+		removeDogFromOwner(dog);
+	}
+	
+	private void removeOwner() {
+		Owner owner = findOwnerByInput();
+		if (owner == null) {
+			output.error("no such owner");
+			return;
+		}
+		removeDogsFromOwner(owner);
+		ownerList.remove(owner);
+		output.println(owner.getName() + " was removed from the register");
+	}
+
+	
+	/* -- HELPER METHODS -- */
+	
+	private void sortDogs() {
+		for (int i = 0 ; i < dogList.size() ; i++) {
+			int smallestDogIndex = findSmallestDog(i);
+			if (i != smallestDogIndex) {
+				swapDogs(i, smallestDogIndex);
+			}
+		}
+	}
+	
 	private void swapDogs(int indexOne, int indexTwo) {
 		Dog placeholder = dogList.get(indexOne);
 		dogList.set(indexOne, dogList.get(indexTwo));
@@ -88,13 +209,15 @@ public class DogRegister {
 		return currentMinIndex;
 	}
 	
-	private void sortDogs() {
-		for (int i = 0 ; i < dogList.size() ; i++) {
-			int smallestDogIndex = findSmallestDog(i);
-			if (i != smallestDogIndex) {
-				swapDogs(i, smallestDogIndex);
+	private String addDogsToListByTailLength() {
+		double smallestTailLength = input.decimal("\nSmallest tail length to display");
+		String dogsToList = "";
+		for (Dog dog : dogList) {
+			if (smallestTailLength <= dog.getTailLength()) {
+				dogsToList += "\n* " + dog;
 			}
 		}
+		return dogsToList;
 	}
 	
 	private void removeDogsFromOwner(Owner owner) {
@@ -107,17 +230,6 @@ public class DogRegister {
 		}
 	}
 	
-	private void removeOwner() {
-		Owner owner = findOwnerByInput();
-		if (owner == null) {
-			output.error("no such owner");
-			return;
-		}
-		removeDogsFromOwner(owner);
-		ownerList.remove(owner);
-		output.println(owner.getName() + " was removed from the register");
-	}
-	
 	private void removeDogFromOwner(Dog dog) {
 		Owner owner = dog.getOwner();
 		if (dog.getOwner() == null) {
@@ -128,85 +240,24 @@ public class DogRegister {
 		output.println(dog.getName() + " was removed from " + owner.getName());
 	}
 	
-	private void removeOwnedDog() {
-		Dog dog = findDogByInput();
-		if (dog == null) {
-			output.print("no such dog");
-			return;
-		}
-		removeDogFromOwner(dog);
-	}
-	
-	private Owner findOwnerInRegister(String nameToFind) {
-		for (Owner owner : ownerList) {
-			if (nameToFind.equalsIgnoreCase(owner.getName())) {
-				return owner;
-			}
-		}
-		return null;
-	}
-	
-	private void giveDog() {
-		Dog dog = findDogByInput();
-		if (dog == null) {
-			output.error("no dog with that name");
-			return;
-		}
-		
-		if (dog.getOwnerName().length() > 0) {
-			output.error("the dog already has an owner");
-			return;
-		}
-		
-		Owner owner = findOwnerByInput();
-		if (owner == null) {
-			output.error("no such owner");
-			return;
-		}
-		
-		connectDogAndOwner(owner, dog);
-	}
-	
 	private void connectDogAndOwner(Owner owner, Dog dog) {
 		dog.setOwner(owner);
 		output.println(dog.getName() + " was given to " + owner.getName());
-	}
-	
-	private void listOwners() {
-		if (ownerList.size() == 0) {
-			output.error("no owners registered");
-			return;
-		}
-		for (Owner owner : ownerList) {
-			output.println(owner.getName()  + " [" + owner.getDogsString() + "]");
-		}
-	}
-	
-	private void registerNewOwner() {
-		String name = input.formattedString("Name");
-		while (name.length() < 1) {
-			output.error("the name can't be empty");
-			name = input.formattedString("Name");
-		}
-		ownerList.add(new Owner(name));
-		output.println(name + " added to the register");
-	}
-	
-	private void removeDog() {
-		Dog dog = findDogByInput();
-		if (dog == null) {
-			output.error("no such name");
-			return;
-		}
-		dog.removeOwner();
-		dogList.remove(dog);
-		output.println(dog.getName() + " was removed from the register");
 	}
 	
 	private Dog findDogInRegisterByName(String nameToFind) {
 		for (Dog dog : dogList) {
 			if (nameToFind.equalsIgnoreCase(dog.getName())) {
 				return dog;
+			}
+		}
+		return null;
+	}
+	
+	private Owner findOwnerInRegister(String nameToFind) {
+		for (Owner owner : ownerList) {
+			if (nameToFind.equalsIgnoreCase(owner.getName())) {
+				return owner;
 			}
 		}
 		return null;
@@ -222,52 +273,26 @@ public class DogRegister {
 		return findOwnerInRegister(ownerName);
 	}
 	
-	private void increaseAge() {
-		Dog dog = findDogByInput();
-		if (dog == null) {
-			output.error("no such dog");
-			return;
-		}
-		dog.increaseAge();
-		output.println(dog.getName() + " is now one year older");
+	
+	/* -- PROGRAM RUNNING METHODS -- */
+	
+	private void run() {
+		greetUser();
+		runCommandLoop();
+		exitProgram();
 	}
 	
-	private String addDogsToListByTailLength() {
-		double smallestTailLength = input.decimal("\nSmallest tail length to display");
-		String dogsToList = "";
-		for (Dog dog : dogList) {
-			if (smallestTailLength <= dog.getTailLength()) {
-				dogsToList += "\n* " + dog;
-			}
-		}
-		return dogsToList;
+	private void greetUser() {
+		output.println("\nWelcome!\n");
+		printCommandMenu();
 	}
 	
-	private void listDogs() {
-		sortDogs();
-		if (dogList.size() == 0) {
-			output.error("no dogs registered");
-			return;
-		}
-		
-		String dogsToList = addDogsToListByTailLength();
-		if (dogsToList.length() == 0) {
-			output.error("no dogs with such a large tail");
-			return;
-		}
-		
-		output.print("The following dogs has such a large tail:");
-		output.println(dogsToList);
-	}
-	
-	private void registerNewDog() {
-		String name = input.formattedString("Name");
-		String breed = input.formattedString("Breed");
-		int age = input.integer("Age");
-		int weight = input.integer("Weight");
-	
-		dogList.add(new Dog(name, breed, age, weight));
-		output.println(name + " added to the register");
+	private void runCommandLoop() {
+		String userCommand;
+		do {
+			userCommand = input.string("Command");
+			handleCommand(userCommand);
+		} while (!userCommand.equals(EXIT_COMMAND));
 	}
 	
 	private void printCommandMenu() {
@@ -284,10 +309,6 @@ public class DogRegister {
 			"\n* remove owner" +
 			"\n* exit"
 		);
-	}
-	
-	private void sayFarewellToUser() {
-		output.println("Välkommen åter!");
 	}
 	
 	private void handleCommand(String userCommand) {
@@ -309,27 +330,12 @@ public class DogRegister {
 		}
 	}
 	
-	private void runCommandLoop() {
-		String userCommand;
-		do {
-			userCommand = input.string("Command");
-			handleCommand(userCommand);
-		} while (!userCommand.equals(EXIT_COMMAND));
-	}
-	
-	private void greetUser() {
-		output.println("\nWelcome!\n");
-		printCommandMenu();
+	private void sayFarewellToUser() {
+		output.println("Välkommen åter!");
 	}
 	
 	private void exitProgram() {
 		sayFarewellToUser();
-	}
-		
-	private void run() {
-		greetUser();
-		runCommandLoop();
-		exitProgram();
 	}
 	
 	public static void main(String[] args) {
